@@ -53,9 +53,9 @@ export class GoogleDriveWorkspaceSourceAdapter implements WorkspaceSourceAdapter
   classify(item: SourceItemDescriptor): CaptureClassification {
     if (item.itemKind === FOLDER || item.itemKind === SHORTCUT) return { kind: "skip-container" };
     const native = exportsByMime[item.itemKind];
-    if (native) return { kind: "capture", representation: native.representation, mediaType: native.mime };
+    if (native) return { kind: "capture", representation: this.representation(native.representation), mediaType: native.mime };
     if (item.itemKind.startsWith(GOOGLE_PREFIX)) return { kind: "unsupported_capture" };
-    return { kind: "capture", representation: null, mediaType: item.itemKind || "application/octet-stream" };
+    return { kind: "capture", representation: this.representation("original"), mediaType: item.itemKind || "application/octet-stream" };
   }
 
   async establishCursor(request: WorkspaceSourceRequest) {
@@ -139,6 +139,9 @@ export class GoogleDriveWorkspaceSourceAdapter implements WorkspaceSourceAdapter
     return this.json<DriveFile>(`${API}/files/${encodeURIComponent(id)}?${params}`);
   }
   private commonParams(): URLSearchParams { const params = new URLSearchParams({ supportsAllDrives: "true" }); this.applyDriveParams(params); return params; }
+  private representation(kind: string): string {
+    return `google-drive@${this.config.adapterVersion ?? "1"}/${kind}`;
+  }
   private applyDriveParams(params: URLSearchParams): void {
     if (this.config.mode === "shared-drive") { params.set("driveId", this.config.providerWorkspaceId); params.set("corpora", "drive"); params.set("includeItemsFromAllDrives", "true"); }
   }

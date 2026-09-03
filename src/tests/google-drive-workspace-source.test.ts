@@ -43,9 +43,9 @@ describe("GoogleDriveWorkspaceSourceAdapter", () => {
     expect(listed.value).toHaveLength(6);
     for (const [id, , representation] of native) {
       const item = listed.value.find((candidate) => candidate.providerItemId === id)!;
-      expect(source.classify(item)).toMatchObject({ kind: "capture", representation });
+      expect(source.classify(item)).toMatchObject({ kind: "capture", representation: `google-drive@1/${representation}` });
       await expect(source.readItem({ scope, workspaceId, providerItemId: id, expectedProviderVersion: "1" })).resolves.toMatchObject({
-        ok: true, value: { captureRepresentation: representation },
+        ok: true, value: { captureRepresentation: `google-drive@1/${representation}` },
       });
     }
     expect(source.classify(listed.value.find((item) => item.providerItemId === "form")!)).toEqual({ kind: "unsupported_capture" });
@@ -57,7 +57,7 @@ describe("GoogleDriveWorkspaceSourceAdapter", () => {
     const cursor = await source.establishCursor({ scope, workspaceId });
     await source.listItems({ scope, workspaceId });
     await expect(source.readItem({ scope, workspaceId, providerItemId: "binary", expectedProviderVersion: "1" })).resolves.toMatchObject({
-      ok: true, value: { mediaType: "text/plain", captureRepresentation: null },
+      ok: true, value: { mediaType: "text/plain", captureRepresentation: "google-drive@1/original" },
     });
     if (!cursor.ok) throw new Error("cursor unavailable");
     await expect(source.reconcileChanges({ scope, workspaceId, after: cursor.value })).resolves.toEqual({
