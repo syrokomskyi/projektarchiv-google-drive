@@ -1,6 +1,11 @@
 {
   "extends": "../../tsconfig/node-lib.json",
-  "compilerOptions": { "rootDir": "src", "outDir": "dist", "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json", "types": ["node"] },
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "types": ["node"]
+  },
   "include": ["src/**/*.ts"],
   "exclude": ["src/tests", "src/testing"]
 }

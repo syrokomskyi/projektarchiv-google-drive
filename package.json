@@ -13,12 +13,7 @@
       "default": "./src/index.ts"
     }
   },
-  "files": [
-    "dist/",
-    "src/",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["dist/", "src/", "README.md", "LICENSE"],
   "scripts": {
     "build": "pnpm exec tsc -p tsconfig.json",
     "build:check": "pnpm exec tsc -p tsconfig.json --noEmit",
