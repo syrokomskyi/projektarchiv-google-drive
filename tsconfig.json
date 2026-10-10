@@ -1,14 +1,18 @@
 {
-  "extends": "../../tsconfig/node-lib.json",
   "compilerOptions": {
+    "target": "ES2022",
+    "module": "preserve",
+    "noEmit": false,
+    "declaration": true,
+    "rewriteRelativeImportExtensions": true,
+    "types": [
+      "node"
+    ],
     "rootDir": "src",
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
-    "types": [
-      "node"
-    ]
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },
   "include": [
     "src/**/*.ts"

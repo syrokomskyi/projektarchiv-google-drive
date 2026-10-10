@@ -1,0 +1,6 @@
+minimumReleaseAgeExclude:
+  - '@warpgogol/forge@6.2.0'
+  - '@warpgogol/projektarchiv-core@0.1.0'
+  - '@warpgogol/projektarchiv-operations@0.1.0'
+  - '@warpgogol/werkstatt-engine@1.13.0'
+  - '@warpgogol/werkstatt-shared@0.17.0'
