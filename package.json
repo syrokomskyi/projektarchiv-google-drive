@@ -22,6 +22,7 @@
   "scripts": {
     "build": "pnpm exec tsc -p tsconfig.json",
     "build:check": "pnpm exec tsc -p tsconfig.json --noEmit",
+    "typecheck": "pnpm exec tsc -p tsconfig.json --noEmit",
     "check": "pnpm run build:check && pnpm run test",
     "lint": "pnpm exec eslint \"src/**/*.ts\"",
     "test": "vitest run"
