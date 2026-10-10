@@ -4,6 +4,10 @@
   "private": false,
   "type": "module",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syrokomskyi/projektarchiv-google-drive.git"
+  },
   "description": "Google Drive WorkspaceSourceAdapter for Projektarchiv.",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
