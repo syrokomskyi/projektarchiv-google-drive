@@ -1,0 +1,42 @@
+forgePlugin: false
+# extract.config.yaml — standalone package export for @warpgogol/projektarchiv-google-drive
+
+projectDir: packages/projektarchiv-google-drive
+destName: projektarchiv-google-drive
+standalone: true
+
+workspacePrefixes:
+  - "@warpgogol/"
+stripScopes:
+  - "@warpgogol/"
+preservePackages:
+  - "@warpgogol/projektarchiv-google-drive"
+  - "@warpgogol/projektarchiv-core"
+  - "@warpgogol/projektarchiv-operations"
+packageManager: pnpm
+
+ci:
+  provider: github-actions
+  publish: true
+  nodeVersion: 24
+  provenance: true
+
+ignoreDirs:
+  - .turbo
+  - node_modules
+
+excludePathSegments:
+  - .npmrc
+  - pnpm-lock.yaml
+  - tests
+
+postProcess:
+  - action: delete
+    path: pnpm-lock.yaml
+
+git:
+  remote: git@github.com:syrokomskyi/projektarchiv-google-drive.git
+  autoPush: true
+  # RFC-1252/repo-extract >=1.4.0: non-fast-forward push after history
+  # transfer reconciles via fetch + merge -s ours + retry. Never force-push.
+  autoReconcile: true
